@@ -9,6 +9,7 @@ import { theme } from './theme';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
