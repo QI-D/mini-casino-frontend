@@ -47,7 +47,6 @@ const GameContainer = () => {
               src={gameImage || '/images/default-game.jpg'}
               height={400}
               alt={currentGame.name}
-              withPlaceholder
             />
           </Card.Section>
         </Card>

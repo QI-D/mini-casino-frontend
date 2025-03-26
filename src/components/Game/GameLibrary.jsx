@@ -81,7 +81,7 @@ const GameLibrary = () => {
       </Box>
 
       {loading && !games.length ? (
-        <LoadingOverlay visible overlayBlur={2} />
+        <LoadingOverlay visible />
       ) : error ? (
         <Alert color="red" title="Error">
           {error}

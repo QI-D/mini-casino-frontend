@@ -80,7 +80,6 @@ const HomePage = () => {
             component={Link}
             to="/games"
             size="lg"
-            rightIcon={<IconArrowRight size={18} />}
           >
             View All Games
           </Button>

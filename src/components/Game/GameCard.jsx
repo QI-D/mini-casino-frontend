@@ -34,7 +34,6 @@ const GameCard = ({ game }) => {
           src={gameImage || '/images/default-game.jpg'}
           height={160}
           alt={game.name}
-          withPlaceholder
         />
       </Card.Section>
 
