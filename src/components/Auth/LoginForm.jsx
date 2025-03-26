@@ -23,11 +23,7 @@ const LoginForm = ({ onSuccess }) => {
     initialValues: {
       username: '',
       password: '',
-    },
-    validate: {
-      username: (value) => (value.length < 3 ? 'Username must be at least 3 characters' : null),
-      password: (value) => (value.length < 5 ? 'Password must be at least 5 characters' : null),
-    },
+    }
   });
 
   const handleSubmit = async (values) => {

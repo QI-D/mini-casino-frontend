@@ -4,7 +4,7 @@ import { registerUser } from '../../redux/thunks';
 import { TextInput, PasswordInput, Button, Stack } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { IconAt, IconLock, IconCalendar, IconUser } from '@tabler/icons-react';
+import { IconLock, IconCalendar, IconUser } from '@tabler/icons-react';
 
 const RegisterForm = ({ onSuccess }) => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const RegisterForm = ({ onSuccess }) => {
       confirmPassword: '',
       birthdate: null,
     },
+    validateInputOnChange: true,
     validate: {
       confirmPassword: (value, values) =>
         value !== values.password ? 'Passwords do not match' : null,
