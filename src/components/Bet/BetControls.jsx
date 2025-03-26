@@ -10,8 +10,9 @@ import {
   Title,
   Alert,
   LoadingOverlay,
+  SimpleGrid,
 } from '@mantine/core';
-import { IconCoin, IconAlertCircle } from '@tabler/icons-react';
+import { IconAlertCircle } from '@tabler/icons-react';
 
 const betAmounts = [1, 3, 5, 10];
 
@@ -23,7 +24,7 @@ const BetControls = ({ game }) => {
   const [customAmount, setCustomAmount] = useState('');
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [betResult, setBetResult] = useState(null); // State to store bet result
+  const [betResult, setBetResult] = useState(null);
 
   const handleBet = async (amount) => {
     if (!token) {
@@ -78,9 +79,9 @@ const BetControls = ({ game }) => {
   };
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card padding="lg" radius="md" shadow="xs" withBorder>
       <LoadingOverlay visible={isBetting} />
-      
+
       {error && (
         <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" mb="md">
           {error}
@@ -99,49 +100,59 @@ const BetControls = ({ game }) => {
         </Alert>
       )}
 
-      <Title order={4} mb="md">
-        Quick Bets
-      </Title>
-      <Group mb="xl">
-        {betAmounts.map((amount) => (
-          <Button
-            key={amount}
-            onClick={() => {
-              setSelectedAmount(amount);
-              handleBet(amount);
-            }}
-            disabled={isBetting || amount > balance}
-            variant={selectedAmount === amount ? 'filled' : 'outline'}
-          >
-            ${amount}
-          </Button>
-        ))}
-      </Group>
+      <SimpleGrid cols={2} spacing="lg" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <div>
+          <Group spacing="xs" mb="sm">
+            <Title order={4}>Your Balance: ${balance.toFixed(2)}</Title>
+          </Group>
 
-      <Title order={4} mb="md">
-        Custom Bet
-      </Title>
-      <form onSubmit={handleCustomBet}>
-        <Group align="flex-end">
-          <NumberInput
-            label="Bet Amount"
-            placeholder="Enter amount"
-            value={customAmount}
-            onChange={(value) => setCustomAmount(value)}
-            min={game.minBet}
-            max={game.maxBet}
-            precision={2}
-            step={0.1}
-            style={{ flex: 1 }}
-          />
-          <Button type="submit" disabled={isBetting}>
-            Place Bet
-          </Button>
-        </Group>
-        <Text size="sm" color="dimmed" mt="xs">
-          Min: ${game.minBet.toFixed(2)} | Max: ${game.maxBet.toFixed(2)}
-        </Text>
-      </form>
+          <Title order={4} mb="md">
+            Quick Bets
+          </Title>
+          <Group mb="xl" direction="row" spacing="sm">
+            {betAmounts.map((amount) => (
+              <Button
+                key={amount}
+                onClick={() => {
+                  setSelectedAmount(amount);
+                  handleBet(amount);
+                }}
+                disabled={isBetting || amount > balance}
+                variant={selectedAmount === amount ? 'filled' : 'outline'}
+              >
+                ${amount}
+              </Button>
+            ))}
+          </Group>
+        </div>
+
+        <div>
+          <Title order={4} mb="md">
+            Custom Bet
+          </Title>
+          <form onSubmit={handleCustomBet}>
+            <Group align="flex-end">
+              <NumberInput
+                label="Bet Amount"
+                placeholder="Enter amount"
+                value={customAmount}
+                onChange={(value) => setCustomAmount(value)}
+                min={game.minBet}
+                max={game.maxBet}
+                precision={2}
+                step={0.1}
+                style={{ flex: 1 }}
+              />
+              <Button type="submit" disabled={isBetting}>
+                Place Bet
+              </Button>
+            </Group>
+            <Text size="sm" c="dimmed" mt="xs">
+              Min: ${game.minBet.toFixed(2)} | Max: ${game.maxBet.toFixed(2)}
+            </Text>
+          </form>
+        </div>
+      </SimpleGrid>
     </Card>
   );
 };

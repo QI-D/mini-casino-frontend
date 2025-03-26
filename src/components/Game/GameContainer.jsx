@@ -14,15 +14,15 @@ import {
   Badge,
   LoadingOverlay,
   Alert,
+  Box
 } from '@mantine/core';
-import { IconCoin, IconMoodDollar, IconMoodEmpty } from '@tabler/icons-react';
+import { IconMoodDollar, IconMoodEmpty } from '@tabler/icons-react';
 import { formatGameNameToImage } from '../../utils/formatGameName';
 
 const GameContainer = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { currentGame, loading, error } = useSelector((state) => state.games);
-  const { balance } = useSelector((state) => state.player);
 
   useEffect(() => {
     dispatch(fetchGameById(id));
@@ -40,47 +40,53 @@ const GameContainer = () => {
         {currentGame.name}
       </Title>
 
-      <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <SimpleGrid cols={2} spacing="lg" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Card.Section>
+          <Card.Section
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 400,
+            }}
+          >
             <Image
               src={gameImage || '/images/default-game.jpg'}
-              height={400}
               alt={currentGame.name}
+              style={{
+                maxHeight: '100%',
+                maxWidth: '100%',
+                objectFit: 'contain',
+              }}
             />
           </Card.Section>
         </Card>
 
-        <div>
-          <Card shadow="sm" padding="lg" radius="md" withBorder mb="md">
-            <Group position="apart" mb="md">
-              <Text weight={500}>Game Stats</Text>
-              <Badge color="green" variant="light">
-                {(currentGame.chanceOfWinning * 100).toFixed(0)}% Win Chance
-              </Badge>
-            </Group>
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Group position="apart" mb="md">
+            <Title order={4}>Game Stats</Title>
+            <Badge color="green" variant="light">
+              {(currentGame.chanceOfWinning * 100).toFixed(0)}% Win Chance
+            </Badge>
+          </Group>
 
-            <Group spacing="xs" mb="sm">
-              <IconCoin size={18} />
-              <Text>Your Balance: ${balance.toFixed(2)}</Text>
-            </Group>
+          <Group spacing="xs" mb="sm">
+            <IconMoodDollar size={18} />
+            <Text>Payout: {currentGame.winningMultiplier}x</Text>
+          </Group>
 
-            <Group spacing="xs" mb="sm">
-              <IconMoodDollar size={18} />
-              <Text>Payout: {currentGame.winningMultiplier}x</Text>
-            </Group>
-
-            <Group spacing="xs" mb="sm">
-              <IconMoodEmpty size={18} />
-              <Text>
-                Bet Range: ${currentGame.minBet.toFixed(2)} - ${currentGame.maxBet.toFixed(2)}
-              </Text>
-            </Group>
-          </Card>
-
-          <BetControls game={currentGame} />
-        </div>
+          <Group spacing="xs" mb="sm">
+            <IconMoodEmpty size={18} />
+            <Text>
+              Bet Range: ${currentGame.minBet.toFixed(2)} - ${currentGame.maxBet.toFixed(2)}
+            </Text>
+          </Group>
+        </Card>
       </SimpleGrid>
+
+      <Box mt="xl">
+        <BetControls game={currentGame} />
+      </Box>
     </Container>
   );
 };

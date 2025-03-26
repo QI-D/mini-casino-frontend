@@ -111,11 +111,11 @@ const AppHeader = () => {
             {isAuthenticated ? (
               <>
                 <Group gap="xs" wrap="nowrap">
-                  <Avatar color="blue" radius="xl" size="sm">
+                  <Avatar color="blue" radius="xl" size="md">
                     {user.username.charAt(0).toUpperCase()}
                   </Avatar>
                   <Box style={{ whiteSpace: 'nowrap' }}>
-                    <Text fw={500} size="sm" c="dark.7">
+                    <Text fw={500} size="sm" c="dark.7" ta="center">
                       {user.username}
                     </Text>
                     <Group gap={4}>
