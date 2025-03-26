@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Alert } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
+import { IconAlertCircle } from '@tabler/icons-react';
 
 const BaseModal = ({ show, onClose, title, content, size = 'md', icon: Icon, error }) => {
   return (
@@ -26,7 +26,7 @@ const BaseModal = ({ show, onClose, title, content, size = 'md', icon: Icon, err
     >
       {error && (
         <Alert
-          icon={<IconX size={18} />}
+          icon={<IconAlertCircle size={16} />}
           title="Error"
           color="red"
           mb="md"
