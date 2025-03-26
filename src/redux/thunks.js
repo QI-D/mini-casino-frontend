@@ -155,6 +155,10 @@ export const searchGames = (name) => async (dispatch) => {
   }
 };
 
+export const loadMoreGames = () => (dispatch) => {
+  dispatch({ type: 'games/loadMore' });
+};
+
 // Bet Thunks
 export const placeBet = (token, gameId, amount) => async (dispatch) => {
   try {

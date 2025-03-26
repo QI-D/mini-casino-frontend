@@ -60,6 +60,9 @@ const gameSlice = createSlice({
     clearGameError: (state) => {
       state.error = null;
     },
+    loadMore: (state) => {
+      state.visibleGames += 8;
+    },
   },
 });
 
