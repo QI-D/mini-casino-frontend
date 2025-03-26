@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState}  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/thunks';
 import { 
@@ -9,8 +9,7 @@ import {
   Alert,
   Container,
   Title,
-  Paper,
-  Box
+  Paper
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconAt, IconLock, IconAlertCircle } from '@tabler/icons-react';
@@ -18,6 +17,7 @@ import { IconAt, IconLock, IconAlertCircle } from '@tabler/icons-react';
 const LoginForm = ({ onSuccess }) => {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);
+  const [localError, setLocalError] = useState('');
 
   const form = useForm({
     initialValues: {
@@ -31,7 +31,7 @@ const LoginForm = ({ onSuccess }) => {
       await dispatch(loginUser(values));
       onSuccess();
     } catch (error) {
-      console.error('Login failed:', error);
+      setLocalError(error.message);
     }
   };
 
@@ -54,7 +54,13 @@ const LoginForm = ({ onSuccess }) => {
                 {error}
               </Alert>
             )}
-            
+
+            {localError && (
+              <Alert icon={<IconAlertCircle size={16} />} color="red" mb="md">
+                {localError}
+              </Alert>
+            )}
+
             <TextInput
               label="Username"
               placeholder="Your username"
@@ -76,7 +82,7 @@ const LoginForm = ({ onSuccess }) => {
               type="submit" 
               fullWidth 
               mt="xl"
-              loading={form.isSubmitting}
+              loading={form.submitting}
             >
               Sign in
             </Button>

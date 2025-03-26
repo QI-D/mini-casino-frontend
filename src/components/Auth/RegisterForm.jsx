@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/thunks';
-import { TextInput, PasswordInput, Button, Stack } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Stack, Alert } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { IconLock, IconCalendar, IconUser } from '@tabler/icons-react';
+import { IconLock, IconCalendar, IconUser, IconAlertCircle } from '@tabler/icons-react';
 
 const RegisterForm = ({ onSuccess }) => {
   const dispatch = useDispatch();
+  const [localError, setLocalError] = useState('');
 
   const form = useForm({
     initialValues: {
@@ -35,13 +36,19 @@ const RegisterForm = ({ onSuccess }) => {
       await dispatch(registerUser(values));
       onSuccess();
     } catch (error) {
-      console.error('Registration failed:', error);
+      setLocalError(error.message);
     }
   };
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack>
+        {localError && (
+          <Alert icon={<IconAlertCircle size={16} />} color="red" mb="md">
+            {localError}
+          </Alert>
+        )}
+
         <TextInput
           label="Username"
           placeholder="Your username"
