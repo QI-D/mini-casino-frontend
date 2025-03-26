@@ -20,7 +20,7 @@ const getBetSummary = async (token) => {
   }
 }
 
-const placeBet = async (token, gameId, amount) => {
+const placeBet = async (token, gameId, betAmount) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
@@ -28,7 +28,7 @@ const placeBet = async (token, gameId, amount) => {
   };
 
   try {
-    const response = await axios.post(`${BASE_URL}${PLACE_BET_API}`, { gameId, amount }, config);
+    const response = await axios.post(`${BASE_URL}${PLACE_BET_API}`, { gameId, betAmount }, config);
     return response.data;
   } catch (error) {
     throw error.response?.data?.message || error.message || 'Failed to place a bet.';

@@ -164,10 +164,10 @@ export const loadMoreGames = () => (dispatch) => {
 };
 
 // Bet Thunks
-export const placeBet = (token, gameId, amount) => async (dispatch) => {
+export const placeBet = (token, gameId, betAmount) => async (dispatch) => {
   try {
     dispatch(placeBetStart());
-    const response = await betService.placeBet(token, gameId, amount);
+    const response = await betService.placeBet(token, gameId, betAmount);
     dispatch(placeBetSuccess(response.bet));
     // Update balance after bet
     dispatch(fetchBalance(token));
