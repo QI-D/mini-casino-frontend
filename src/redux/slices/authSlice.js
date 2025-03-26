@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const token = localStorage.getItem('authToken');
+const user = localStorage.getItem('authUser');
+
 const initialState = {
-  user: null,
-  token: null,
+  user: user ? JSON.parse(user) : null,
+  token: token || null,
   isAuthenticated: false,
   loading: false,
   error: null,
@@ -48,6 +51,9 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.loading = false;
       state.error = null;
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('authUser');
+      localStorage.removeItem('reduxState');
     },
     clearError: (state) => {
       state.error = null;

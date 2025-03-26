@@ -43,6 +43,10 @@ export const loginUser = (credentials) => async (dispatch) => {
   try {
     dispatch(loginStart());
     const response = await authService.login(credentials);
+
+    localStorage.setItem('authToken', response.token);
+    localStorage.setItem('authUser', JSON.stringify(response.player));
+
     dispatch(loginSuccess(response));
     // After successful login, fetch user balance
     dispatch(fetchBalance(response.token));
