@@ -23,6 +23,7 @@ const BetControls = ({ game }) => {
   const [customAmount, setCustomAmount] = useState('');
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [betResult, setBetResult] = useState(null); // State to store bet result
 
   const handleBet = async (amount) => {
     if (!token) {
@@ -47,9 +48,21 @@ const BetControls = ({ game }) => {
 
     try {
       setErrorMessage('');
-      await dispatch(placeBet(token, game.id, amount));
+      const result = await dispatch(placeBet(token, game.id, amount));
+
+      if (result?.bet?.won) {
+        setBetResult({
+          message: `You won! Winnings: $${result.bet.winnings.toFixed(2)}`,
+          color: 'green',
+        });
+      } else {
+        setBetResult({
+          message: 'You lost the bet. Better luck next time!',
+          color: 'red',
+        });
+      }
     } catch (error) {
-      console.error('Bet failed:', error);
+      setErrorMessage('Error placing bet. Please try again.');
     }
   };
 
@@ -77,6 +90,12 @@ const BetControls = ({ game }) => {
       {errorMessage && (
         <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" mb="md">
           {errorMessage}
+        </Alert>
+      )}
+
+      {betResult && (
+        <Alert icon={<IconAlertCircle size={16} />} title={betResult.color === 'green' ? 'Congratulations!' : 'Better Luck Next Time!'} color={betResult.color} mb="md">
+          {betResult.message}
         </Alert>
       )}
 
