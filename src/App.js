@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { fetchBalance } from './redux/thunks';
 import AppHeader from './components/common/Header';
 import HomePage from './pages/HomePage';
-// import GamesPage from './pages/GamesPage';
-// import GameDetailPage from './pages/GameDetailPage';
+import GamesPage from './pages/GamesPage';
+import GameDetailPage from './pages/GameDetailPage';
 import { AppShell, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { theme } from './theme';
@@ -35,8 +35,8 @@ const App = () => {
           <AppShell.Main>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              {/* <Route path="/games" element={<GamesPage />} />
-              <Route path="/games/:id" element={<GameDetailPage />} /> */}
+              <Route path="/games" element={<GamesPage />} />
+              <Route path="/games/:id" element={<GameDetailPage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppShell.Main>
