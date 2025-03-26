@@ -55,27 +55,6 @@ const AppHeader = () => {
             Mini Casino
           </Title>
 
-          <Group gap="xl" visibleFrom="sm">
-            <Button
-              component={Link}
-              to="/"
-              variant="subtle"
-              color="dark.7"
-              size="compact-md"
-            >
-              Home
-            </Button>
-            <Button
-              component={Link}
-              to="/games"
-              variant="subtle"
-              color="dark.7"
-              size="compact-md"
-            >
-              Games
-            </Button>
-          </Group>
-
           <Group gap="md">
             {isAuthenticated ? (
               <>
