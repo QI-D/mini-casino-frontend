@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/slices/authSlice';
-import AuthModal from '../Auth/AuthModal';
+import BaseModal from './BaseModal';
+import AuthTabs from '../Auth/AuthTabs';
+import DepositForm from '../Player/DepositForm';
+import BetSummary from '../Bet/BetSummary';
 import {
   AppShell,
   Group,
@@ -15,10 +18,15 @@ import {
   Box,
   rem,
 } from '@mantine/core';
-import { IconLogin, IconLogout, IconCoin } from '@tabler/icons-react';
+import { 
+  IconLogin,
+  IconLogout,
+  IconWallet,
+  IconReport,
+  IconCoin
+} from '@tabler/icons-react';
 
 const AppHeader = () => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const { balance } = useSelector((state) => state.player);
   const dispatch = useDispatch();
@@ -28,6 +36,50 @@ const AppHeader = () => {
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');
+  };
+  
+  const [modalData, setModalData] = useState({
+    show: false,
+    title: '',
+    content: null,
+    icon: null,
+    size: 'md',
+  });
+
+  const openModal = (type) => {
+    switch (type) {
+      case 'auth':
+        setModalData({
+          show: true,
+          title: 'Access Your Account',
+          content: <AuthTabs onSuccess={closeModal} />,
+          icon: IconLogin,
+        });
+        break;
+      case 'deposit':
+        setModalData({
+          show: true,
+          title: 'Deposit Funds',
+          content: <DepositForm onSuccess={closeModal} />,
+          icon: IconWallet,
+        });
+        break;
+      case 'betSummary':
+        setModalData({
+          show: true,
+          title: 'Bet Summary',
+          content: <BetSummary onSuccess={closeModal} />,
+          icon: IconReport,
+          size: 'lg',
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const closeModal = () => {
+    setModalData({ ...modalData, show: false });
   };
 
   return (
@@ -75,6 +127,24 @@ const AppHeader = () => {
                   </Box>
                 </Group>
                 <Button
+                  leftSection={<IconWallet size={16} color={theme.colors.white} />}
+                  variant="outline"
+                  color="blue.6"
+                  size="compact-md"
+                  onClick={() => openModal('deposit')}
+                >
+                  Deposit
+                </Button>
+                <Button
+                  leftSection={<IconReport size={16} color={theme.colors.white} />}
+                  variant="outline"
+                  color="blue.6"
+                  size="compact-md"
+                  onClick={() => openModal('betSummary')}
+                >
+                  Bet Summary
+                </Button>
+                <Button
                   leftSection={<IconLogout size={16} color={theme.colors.red[7]} />}
                   variant="outline"
                   color="red.7"
@@ -90,7 +160,7 @@ const AppHeader = () => {
                 variant="filled"
                 color="blue.6"
                 size="compact-md"
-                onClick={() => setShowAuthModal(true)}
+                onClick={() => openModal('auth')}
               >
                 Login / Register
               </Button>
@@ -99,7 +169,14 @@ const AppHeader = () => {
         </Group>
       </Container>
 
-      <AuthModal show={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      <BaseModal
+        show={modalData.show}
+        onClose={closeModal}
+        title={modalData.title}
+        content={modalData.content}
+        icon={modalData.icon}
+        size={modalData.size}
+      />
     </AppShell.Header>
   );
 };
