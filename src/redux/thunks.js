@@ -66,6 +66,12 @@ export const registerUser = (userData) => async (dispatch) => {
     dispatch(registerStart());
     const response = await authService.register(userData);
     dispatch(registerSuccess(response));
+
+    const token = response.token;
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('authUser', JSON.stringify(response.player));
+
+    dispatch(fetchBalance(token));
     return response;
   } catch (error) {
     const errorMessage = typeof error === 'string' ? error : 
