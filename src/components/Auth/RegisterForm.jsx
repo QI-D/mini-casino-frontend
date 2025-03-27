@@ -12,6 +12,7 @@ const RegisterForm = ({ onSuccess }) => {
 
   const form = useForm({
     initialValues: {
+      name: '',
       username: '',
       password: '',
       confirmPassword: '',
@@ -50,9 +51,17 @@ const RegisterForm = ({ onSuccess }) => {
         )}
 
         <TextInput
+          label="Name"
+          placeholder="Your name"
+          leftSection={<IconUser size={16} />}
+          required
+          {...form.getInputProps('name')}
+        />
+
+        <TextInput
           label="Username"
           placeholder="Your username"
-          icon={<IconUser size={16} />}
+          leftSection={<IconUser size={16} />}
           required
           {...form.getInputProps('username')}
         />
@@ -60,7 +69,7 @@ const RegisterForm = ({ onSuccess }) => {
         <PasswordInput
           label="Password"
           placeholder="Your password"
-          icon={<IconLock size={16} />}
+          leftSection={<IconLock size={16} />}
           required
           {...form.getInputProps('password')}
         />
@@ -68,7 +77,7 @@ const RegisterForm = ({ onSuccess }) => {
         <PasswordInput
           label="Confirm Password"
           placeholder="Confirm your password"
-          icon={<IconLock size={16} />}
+          leftSection={<IconLock size={16} />}
           required
           {...form.getInputProps('confirmPassword')}
         />
@@ -76,7 +85,7 @@ const RegisterForm = ({ onSuccess }) => {
         <DateInput
           label="Birthdate"
           placeholder="Select your birthdate"
-          icon={<IconCalendar size={16} />}
+          leftSection={<IconCalendar size={16} />}
           maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 18))}
           required
           {...form.getInputProps('birthdate')}
