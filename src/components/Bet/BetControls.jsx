@@ -78,6 +78,15 @@ const BetControls = ({ game }) => {
     setCustomAmount('');
   };
 
+  const handleAmountChange = (value) => {
+    if (value >= game.minBet && value <= game.maxBet) {
+      setCustomAmount(value);
+      setErrorMessage('');
+    } else {
+      setErrorMessage('Amount out of bet range.');
+    }
+  };
+
   return (
     <Card padding="lg" radius="md" shadow="xs" withBorder>
       <LoadingOverlay visible={isBetting} />
@@ -136,7 +145,7 @@ const BetControls = ({ game }) => {
                 label="Bet Amount"
                 placeholder="Enter amount"
                 value={customAmount}
-                onChange={(value) => setCustomAmount(value)}
+                onChange={(value) => handleAmountChange(value)}
                 min={game.minBet}
                 max={game.maxBet}
                 precision={2}
