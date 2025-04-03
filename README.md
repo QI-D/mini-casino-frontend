@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Mini Casino Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend of the **Mini Casino** platform, built using **React**. It provides a user-friendly interface for players to interact with various casino games, manage their profiles, and place bets. The frontend communicates with the backend API to enable features like player registration, authentication, depositing funds, and playing casino games.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation and Setup](#installation-and-setup)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+  - [Building for Production](#building-for-production)
+- [Screenshots](#screenshots)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Authentication**: Register, login, and manage user sessions securely.
+- **Deposit Funds**: Deposit funds into the player’s account to place bets.
+- **View and Play Games**: Browse and play casino games such as Blackjack and Roulette.
+- **Balance Overview**: Check your account balance and view betting history.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technology Stack
 
-### `npm test`
+- **Frontend**: React.js
+- **State Management**: Redux
+- **Routing**: React Router
+- **API Communication**: Axios or Fetch for API requests
+- **Styling**: Mantine
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation and Setup
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Before you begin, ensure you have the following installed on your system:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Node.js** (v14 or higher)
+- **npm** (v6 or higher)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone the repository to your local machine:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   git clone https://github.com/QI-D/mini-casino-frontend.git
+   cd mini-casino-frontend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Running the Application
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Then open `http://localhost:3000` in your browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Building for Production
 
-### Code Splitting
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This generates optimized static files in the `build` directory.
 
-### Analyzing the Bundle Size
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Home Page
 
-### Making a Progressive Web App
+<img src="./screenshots/homepage.png" alt="Home Page" width="800"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Auth Modal
 
-### Advanced Configuration
+#### Register
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<img src="./screenshots/register.png" alt="Register Page" width="800"/>
 
-### Deployment
+#### Login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="./screenshots/login.png" alt="Login Page" width="800"/>
 
-### `npm run build` fails to minify
+### Games Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./screenshots/games.png" alt="Games Page" width="800"/>
+
+### Game Page
+
+<img src="./screenshots/game.png" alt="Game Page" width="800"/>
+
+### Game Result
+
+#### Won
+
+<img src="./screenshots/game_won.png" alt="Game Won" width="800"/>
+
+#### Lost
+
+<img src="./screenshots/game_lost.png" alt="Game Lost" width="800"/>
+
+### Deposit
+
+<img src="./screenshots/deposit.png" alt="Deposit" width="800"/>
+
+### Bet Summary
+
+<img src="./screenshots/bet_summary.png" alt="Bet Summary" width="800"/>
