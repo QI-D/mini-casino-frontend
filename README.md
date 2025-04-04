@@ -2,6 +2,8 @@
 
 This is the frontend of the **Mini Casino** platform, built using **React**. It provides a user-friendly interface for players to interact with various casino games, manage their profiles, and place bets. The frontend communicates with the backend API to enable features like player registration, authentication, depositing funds, and playing casino games.
 
+The backend for this project is available at: [Mini Casino Backend](https://github.com/QI-D/mini-casino-backend)
+
 ## Table of Contents
 
 - [Features](#features)
